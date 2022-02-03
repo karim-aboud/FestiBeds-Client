@@ -1,0 +1,113 @@
+<div class="page" *ngIf="festival | async as f">
+  <div class="page-route">
+    <a href=""><b>Accueil</b></a>
+    <i class="fa fa-angle-double-right" style="font-size:16px"></i>
+    <b style="color: black;">{{ f?.nomManifestation }}</b><br>
+  </div>
+
+  <hr>
+
+  <div class="page-content">
+    <mat-card class="poster" [@fadeInOut]>
+      <mat-card-content>
+        <img [src]="f.url_photo">
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="details" [@fadeInOut]>
+      <mat-card-content>
+        <div>
+          <span class="title"><b>{{ f?.nomManifestation }}</b></span><br>
+          {{ f?.domaine }}<br><br>
+          <div class="details-container">
+            📅 &nbsp;{{ numberToMonthConverter(f.moisHabituelDebut) }}
+            - <i>{{ f?.duree }} jours</i><br><br>
+            📍 &nbsp;{{ f?.commune?.nomCommune }}<br><br>
+            🔢 &nbsp;{{ f.nbPassDisponibles }} pass disponibles !<br><br>
+            💬 &nbsp;"{{ f.commentaires }}"<br><br>
+            <i class="fa fa-link"></i> &nbsp; &nbsp;<a [href]="f?.siteWeb" target="_blank">{{ f?.siteWeb }}</a><br>
+            <br>
+            💶 &nbsp;<span class="price-tag"><b>{{ calculatePrice(f.prix) }}€</b></span>
+            <br><br>
+            <div class="package-details">
+              <div>
+                <div style="display: flex; justify-content: space-evenly;">
+                  <button class="minus-btn" [disabled]="nbPass==0" (click)="decrementNbPass()">-</button>
+                  <span style="margin-top: 10px;"><b>{{ nbPass }}</b></span>
+                  <button class="plus-btn" (click)="incrementNbPass()">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <app-map [coordX]="getCoordinateX(f.coordonneesInsee)"
+                   [coordY]="getCoordinateY(f.coordonneesInsee)"></app-map>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="etablissements">
+    <h1><b>Etablissements</b> - {{ communeChoisie.nomDepartement }} </h1>
+    <div class="cards-etablissements">
+      <mat-card *ngFor="let e of communeChoisie?.etablissements">
+        <mat-card-content>
+          <img [src]="e.url_photo">
+          <div class="card-details">
+            <div style="display: flex; justify-content: space-between;">
+              <b>{{e.nomCommercial}}</b>
+              <b>{{ convertClassement(e.classement) }} ⭐</b>
+            </div><br>
+            📍 &nbsp;{{ e.adresse }}<br>
+            🏙️ &nbsp;{{ e.commune?.nomDepartement }}<br>
+            📞 &nbsp;{{ e.telephone }} <br>
+            <i class="fa fa-link"></i> &nbsp; &nbsp;<a [href]="e.siteInternet">{{ e.siteInternet }}</a><br>
+            📧 &nbsp;{{e.courriel}}<br><br>
+            <button class="consulter-logements" (click)="etablissementChoisi=e; aChoisiEtablissement=!aChoisiEtablissement">
+              Consulter logements
+            </button><br>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="logements" *ngIf="aChoisiEtablissement" [@fadeInOut]>
+    <h1><b>Logements disponibles</b></h1>
+    <mat-card *ngFor="let logement of etablissementChoisi?.logements">
+      <mat-card-content >
+        <div class="hebergements">
+          <img [src]="logement.url_photo">
+          <div class="hebergements-details">
+            <span class="title"><b>{{ logement?.type }}</b></span><br>
+            👤 &nbsp;{{ logement?.nbPersonnes }} personnes<br><br>
+            📝 &nbsp;{{ logement?.description }}<br><br>
+            🖥 &nbsp;{{ logement?.optionsSpecifiques}}<br><br>
+          </div>
+          <div class="hebergements-prix">
+            <span class="hebergement-prix">
+              <b>{{ logement?.prix }}€</b><span style="font-size: 14px;">/pers.</span><br><br>
+            </span>
+            <button (click)="hebergementChoisi.festival = f; hebergementChoisi.logement = logement;
+            addToCart(hebergementChoisi)" disabled>Choisir</button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <br>
+    Vous avez choisi {{ nbPass }} pass.
+    Choisissez un nombre de logements correspondants.<br>
+    Ex: 3 Pass => 1 chambre double et 1 chambre simple.<br>
+    <button class="rsv-btn" disabled>Réserver</button>
+  </div><br><br>
+
+  <div *ngIf="addedToCart" class="alert alert-warning alert-dismissible fade show hebergements-alert" role="alert">
+    {{ nbPass }} Pass <strong>{{ hebergementChoisi.festival?.nomManifestation }}</strong>
+    + 1 <strong>{{ hebergementChoisi.logement?.type }} </strong> a été ajouté à votre panier.
+    &nbsp; <strong><a routerLink="/panier">Voir le panier</a></strong>.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="addedToCart=false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,212 @@
+.page {
+  background-color: #162a42;
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  background-color: rgb(231, 231, 231);
+  width: fit-content;
+  padding: 50px;
+}
+
+mat-card-title, mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  background-color: #162a42;
+  color: white;
+  text-decoration: none;
+  padding: 9px 25px;
+  border: 2px solid rgb(202, 202, 202);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  width: 100%;
+  background-color: white;
+  color: black;
+}
+
+button:hover {
+  background-color: rgb(245, 244, 244);
+}
+
+.continue-btn-container, .create-btn-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 15px;
+}
+
+.continue-btn, .create-btn {
+  width: fit-content;
+  background-color: #162a42;
+  color: white;
+}
+
+.continue-btn:hover, .create-btn:hover {
+  width: fit-content;
+  background-color: #000000;
+  color: white;
+}
+
+.signup {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.signin {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.create-account {
+  color:rgb(206, 130, 17);
+  margin-left: 5px;
+}
+
+.create-account:hover {
+  color:rgb(206, 130, 17);
+  margin-left: 5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+input, select {
+  width: 100%;
+  min-width: 300px;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  padding: 9px 25px;
+  border-radius: 50px;
+  transition: all 0.3s ease 0s;
+  border: 2px solid rgb(202, 202, 202);
+}
+
+input:hover {
+  border: 2px solid rgb(206, 130, 17);
+}
+
+.separator {
+  color: grey;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.separator::before, .separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid grey;
+}
+.separator::before {
+  margin-right: .25em;
+}
+.separator::after {
+  margin-left: .25em;
+}
+
+mat-card-title {
+  font-family: "Montserrat", sans-serif;
+}
+
+/*
+a {
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.signup{
+  display: flex;
+  justify-content: center;
+}
+
+.separation{
+  display: flex;
+  justify-content: center;
+  font-size:16px;
+  color:rgb(206, 130, 17);
+}
+input{
+  width: 100%;
+  min-width: 300px;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  background-color: white;
+  color: white;
+  text-decoration: none;
+  padding: 9px 25px;
+  border: 2px solid rgb(206, 130, 17);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  border: 2px solid lightgrey;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  padding: 16px;
+  width: 300px;
+  color: white;
+  background-color: red;
+}
+
+.button-login {
+  display: flex;
+  justify-content: center;
+  background-color: #162a42;
+  border : 1px solid lightgray;
+  color : white;
+  width : 300px;
+}
+
+.logo-social{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.fb-login{
+  color:white;
+  background-color: #162a42;
+}
+
+.google-login{
+  color: red;
+  background-color: white;
+}
+*/

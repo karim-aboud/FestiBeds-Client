@@ -1,0 +1,196 @@
+<div class="page">
+  <div class="home-card">
+    <div class="upper-card">
+      <div class="homeCard-title">
+        <div class="title-h1" [@fadeInOut]><b>Trouvez le festival idéal</b></div><br>
+        <!--
+        <div class="title-h3">Recherchez des offres sur des hôtels, des hébergements indépendants et plus encore</div><br>
+        -->
+        <div class="title-h3" [@fadeInOut]>Recherchez des offres sur des hôtels, des hébergements indépendants et plus encore</div><br>
+      </div>
+    </div>
+  </div>
+
+  <div class="split-search">
+    <div class="card-search">
+      <table> <!--class="table table-responsive"-->
+        <colgroup>
+          <col style="width:30%">
+          <col style="width:30%">
+          <col style="width:12%">
+          <col style="width:12%">
+          <col style="width:13%">
+        </colgroup>
+        <tr>
+          <th>Que cherchez-vous ?</th>
+          <th>Mois</th>
+          <th>Prix min.</th>
+          <th>Prix max.</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>
+            <input #recherche type="text" placeholder="Rechercher par nom, ville, domaine, ...">
+          </td>
+          <td>
+            <select #month name="month" id="month">
+              <option value='0'>-----</option>
+              <option value="1">Janvier</option>
+              <option value="2">Fevrier</option>
+              <option value="3">Mars</option>
+              <option value="4">Avril</option>
+              <option value="5">Mai</option>
+              <option value="6">Juin</option>
+              <option value="7">Juillet</option>
+              <option value="8">Aout</option>
+              <option value="9">Septembre</option>
+              <option value="10">Octobre</option>
+              <option value="11">Novembre</option>
+              <option value="12">Decembre</option>
+            </select>
+          </td>
+          <td>
+            <input #prixMin type="number" placeholder="0">
+          </td>
+          <td>
+            <input #prixMax type="number" placeholder="999">
+          </td>
+          <td>
+            <button (click)="addRecherche(recherche.value);
+            addDate(month.value);addPrix(prixMin.value,prixMax.value);  filtrer(); recherche.value='';" class="rechercher-btn">
+              Rechercher
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="lower-card-title">
+    <div *ngIf="filtres.length!=0" class="filtres">
+      <div *ngFor="let filt of filtres">
+        <div *ngIf="filt!='' && filt!='prix' && filt!='date'">
+          <button (click)="removeFiltre(filt);">{{filt}}</button>
+        </div>
+        <div *ngIf="filt=='prix'">
+          <button (click)="removePrix();prixMin.value='0';prixMax.value='999'">{{filt}}</button>
+        </div>
+        <div *ngIf="filt=='date'">
+          <button (click)="removeDate(); month.value='0'">{{filt}}</button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="title-h2" [@fadeInOut]><b>Les festivals à venir</b><hr></div>
+  </div>
+
+  <div></div>
+
+  <div *ngIf="filtres.length==0" class="lower-card">
+    <mat-card
+    *ngFor="let festival of allFestivalsObs| async | paginate: { id: 'festivals-listing',itemsPerPage: 6, currentPage: page, totalItems: totalRecords }">
+      <mat-card-content>
+        <img [src]="festival.url_photo">
+        <div class="card-details">
+          <table>
+            <tr>
+              <td><b>{{ truncateLongString((festival.nomManifestation)).toUpperCase() }}</b></td>
+              <td style="text-align:right">
+                <span>
+                  <b>{{ festival.nbPassDisponibles }} pass</b>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {{ truncateLongString((festival.domaine)) }}
+              </td>
+              <td style="text-align:right"></td>
+            </tr>
+            <tr>
+              <td> &nbsp; </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <!--<i class="fa fa-calendar"></i>-->
+                📅&nbsp;{{ numberToMonthConverter(festival.moisHabituelDebut) }}
+              </td>
+              <td style="text-align:right"> {{ festival.duree }} jours </td>
+            </tr>
+            <tr>
+              <td> &nbsp; </td>
+              <td></td>
+            </tr>
+            <tr>
+            <tr>
+              <td>
+                📍 {{ truncateLongString((festival.commune.nomCommune))?.toUpperCase() }}
+              </td>
+              <td style="text-align:right">
+                <span class="tag"><b>{{festival.prix}} €</b></span>
+              </td>
+            </tr>
+          </table><br>
+          <button [routerLink]="['/festivals', festival.ndegIdentification]" class="see-details">
+            Voir
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="filtres.length!=0" class="lower-card">
+    <mat-card *ngFor="let festival of festivalFiltrer | paginate: { id: 'festivals-listing',itemsPerPage: 6, currentPage: page, totalItems: totalRecords }">
+      <mat-card-content>
+        <img style="height: 250px; width: 250px;" [src]="festival.url_photo">
+        <div class="card-details">
+          <table>
+            <tr>
+              <td><b>{{ truncateLongString((festival.nomManifestation)).toUpperCase() }}</b></td>
+              <td style="text-align:right">
+                <span>
+                  <b>{{ festival.nbPassDisponibles }} pass</b>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {{ truncateLongString((festival.domaine)) }}
+              </td>
+              <td style="text-align:right"></td>
+            </tr>
+            <tr>
+              <td> &nbsp; </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                📅&nbsp;{{ numberToMonthConverter(festival.moisHabituelDebut) }}
+              </td>
+              <td style="text-align:right"> {{ festival.duree }} jours </td>
+            </tr>
+            <tr>
+              <td> &nbsp; </td>
+              <td></td>
+            </tr>
+            <tr>
+            <tr>
+              <td>
+                📍 {{ truncateLongString((festival.commune.nomCommune))?.toUpperCase() }}
+              </td>
+              <td style="text-align:right">
+                <span class="tag"><b>{{festival.prix}} €</b></span>
+              </td>
+            </tr>
+          </table>
+          <a [routerLink]="['/festivals', festival.ndegIdentification]">
+            <button class="see-details">Voir</button>
+          </a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <pagination-controls id="festivals-listing" [maxSize]="5" [directionLinks]="true" (pageChange)="page=$event">
+  </pagination-controls>
+</div>

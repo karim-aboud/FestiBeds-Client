@@ -1,0 +1,101 @@
+<div class="page">
+  <mat-card *ngIf="!createAccount; else accountCreation">
+    <mat-card-title><b>Se connecter</b></mat-card-title>
+    <br>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <p>
+          <select #ut name="user-type" id="user-type">
+            <option value="organisateur">Organisateur de festival</option>
+            <option value="hebergeur">Hébergeur</option>
+            <!--<option value="festivalier">Festivalier</option>-->
+          </select>
+        </p>
+        <p>
+          <input type="text" #e matInput placeholder="Email" formControlName="email">
+        </p>
+        <p>
+          <input type="password" #m matInput placeholder="Password" formControlName="password">
+        </p>
+        <div class="continue-btn-container">
+            <button class="continue-btn" (click)="connection(e.value,m.value,ut.value)">Continuer</button>
+        </div>
+        <div *ngIf="obs | async" role="alert">Email ou Mot de passe incorrect</div>
+        <div class="separator">ou</div><br>
+
+        <p>
+          <button style="display: flex; justify-content: space-evenly;" (click)="loginWithGmail()">
+            <span style="color: #db4a39;" class="iconify" data-icon="entypo-social:google-with-circle" data-width="30" data-height="30"></span>
+            <span style="margin-top: 5px;">Continuer avec Google</span>
+          </button>
+        </p>
+        <p>
+          <button style="display: flex; justify-content: space-evenly;" (click)="loginWithFacebook()">
+            <span style="color: #162a42;" class="iconify" data-icon="entypo-social:facebook-with-circle" data-width="30" data-height="30"></span>
+            <span style="margin-top: 5px;">Continuer avec Facebook</span>
+          </button>
+        </p>
+        <br>
+        <div class="signup">Nouveau client ?
+          <a class="create-account" (click)="createAccount=true">
+            Créez un compte
+          </a>.
+        </div>
+
+        <div *ngIf="auth.user | async as user">
+          {{ user?.displayName }}
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <ng-template #accountCreation>
+    <mat-card>
+      <mat-card-title><b>Créez un compte</b></mat-card-title>
+      <br>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <p>
+            <select #userType name="user-type" id="user-type">
+              <option value="organisateur">Organisateur de festival</option>
+              <option value="hebergeur">Hébergeur</option>
+              <!--<option value="festivalier">Festivalier</option>-->
+            </select>
+          </p>
+          <p>
+            <input type="text" matInput placeholder="Prénom" #prenom formControlName="prenom">
+          </p>
+          <p>
+            <input type="text" matInput placeholder="Nom" #name formControlName="name">
+          </p>
+          <p>
+            <input type="text" matInput placeholder="Email" #email formControlName="email">
+          </p>
+          <p>
+            <input type="text" matInput placeholder="telephone" #telephone formControlName="telephone">
+          </p>
+          <p>
+            <input type="password" matInput placeholder="Mot de passe" #mdp formControlName="motdepasse">
+          </p>
+          <p>
+            <input type="password" matInput placeholder="Confirmer le mot de passe" #confmdp formControlName="confirmmotdepasse">
+          </p>
+
+          <div *ngIf="userType.value=='organisateur'; else elseBlock" class="create-btn-container">
+            <button class="create-btn" (click)="createOrganisateur(prenom.value,name.value,email.value,telephone.value,mdp.value,confmdp.value)">Continuer</button>
+          </div>
+
+          <ng-template #elseBlock class="create-btn-container">
+            <button class="create-btn" (click)="createHebergeur(prenom.value,name.value,email.value,telephone.value,mdp.value,confmdp.value)">Continuer</button>
+          </ng-template>
+          <div *ngIf="obs | async" role="alert">Les deux mots de passe ne correspondent pas</div>
+          <div class="signin">Vous avez déjà un compte?
+            <a class="create-account" (click)="createAccount=false">
+              Se connecter
+            </a>.
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+</div>

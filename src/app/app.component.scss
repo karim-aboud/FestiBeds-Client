@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #162a42;
+}
+
+header {
+  padding: 1% 10% 1% 10%;
+}
+
+.logo {
+  cursor: pointer;
+  width: 150px;
+}
+
+button {
+  margin: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: white;
+  text-decoration: none;
+  padding: 9px 25px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  border: 1.5px solid lightgrey;
+}
+
+button:hover {
+  text-decoration: underline;
+  //background-color: #0f1c2c;
+  //background-color: #000000;
+}
+
+
+.panier {
+  text-decoration: none;
+  color: white;
+}
+
+.panier button {
+  text-decoration: none;
+}
+
+.panier div {
+  margin-left: 5px;
+}
+
+.panier button:hover span {
+  text-decoration: underline;
+}
+
+.panier button:hover div span {
+  text-decoration: none;
+}
+
+div.cart .cart-basket {
+  font-size: .6rem;
+  position: absolute;
+  top: -6px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  color: #fff;
+  background-color: darkred;
+  border-radius: 50%;
+}
+
+.login button {
+  color: #1662af;
+  background-color: white;
+  text-decoration: none;
+  border: 2px solid #1662af;
+}
+
+.login button:hover {
+  color: #162a42;
+  border: 2px solid #162a42 ;
+  text-decoration: none;
+}
+
+.login-btn:hover {
+  text-decoration: none;
+}
+
+mat-menu {
+  height: auto;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.logout {
+  margin-top: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  background-color: darkred;
+}
+
+.logout:hover {
+  background-color: darkred;
+  color: white;
+}
+
+.footer {
+  font-family: "Montserrat", sans-serif;
+  height: 15%;
+  background-color: rgb(70, 70, 70);
+  color: white;
+  align-items: center;
+  border-top: 1px solid rgb(189, 189, 189);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.custom-toggler.navbar-toggler {
+  border-color: white;
+}

@@ -1,0 +1,64 @@
+<div class="page" *ngIf="products.length == 0">
+  <mat-card>
+    <mat-card-title>
+      Votre panier
+    </mat-card-title>
+    <mat-card-content class="center">
+      <h3><b>Votre panier est vide !</b></h3>
+      <button class="empty-cart" (click)="redirectToHome()">Réserver maintenant</button>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="page" *ngIf="products.length != 0">
+  <mat-card>
+    <mat-card-content>
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th><b>No.</b></th>
+            <th><b>Nombre de pass</b></th>
+            <th><b>Festival</b></th>
+            <th><b>Logement</b></th>
+            <th><b>Etablissement</b></th>
+            <th><b>Description</b></th>
+            <th><b>Total</b></th>
+            <th><b>Action</b></th>
+            <th><b>Temps restant</b></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of products; let i = index;">
+            <td>{{ i+1 }}</td>
+            <td>2 Pass</td>
+            <td>
+              <b>{{ item.festival?.nomManifestation }}</b><br>
+              <img [src]="item?.festival?.photos[0]?.url">
+            </td>
+            <td>
+              {{ item.logement?.type }} <br>
+              <img [src]="item?.logement?.photos[0]?.url">
+            </td>
+            <td>Hotel - Les Plumes<!--{{ item.logement?.idEtablissement }}--> </td>
+            <td>
+              Domaine festival: {{ item.festival?.domaine }} <br><br>
+              Options spécifiques logement: {{ item.logement?.optionsSpecifiques }}
+            </td>
+            <td><b>{{ item.festival?.prix + item.logement?.prix }}€</b></td>
+            <td>
+              <button class="btn btn-danger" (click)="removeItem(item)">
+                <i class="fa fa-trash-o"></i>
+              </button>
+            </td>
+            <td><app-countdown></app-countdown></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="display: flex; justify-content: space-evenly;">
+        <button class="btn btn-danger" (click)="emptyCart()">Vider le panier</button>
+        <button routerLink="/accueil" class="btn btn-primary">Ajouter</button>
+        <button class="btn btn-success">Payer</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

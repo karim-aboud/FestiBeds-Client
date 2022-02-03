@@ -1,0 +1,70 @@
+.page {
+  font-family: "Montserrat", sans-serif;
+  margin-top: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  min-height: 100%;
+  display: flex;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: "Montserrat", sans-serif;
+}
+
+mat-card {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  border-radius: 10px;
+}
+
+mat-card:hover {
+  box-shadow: 0 8px 8px 8px rgba(0,0,0,.2), 0 6px 6px 0 rgba(0,0,0,.14), 0 6px 6px 0 rgba(0,0,0,.12) !important;
+  transform: translate3d(0,0,0);
+  transition: background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);
+}
+
+.empty-cart {
+  background-color: #162a42;
+  margin: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: white;
+  text-decoration: none;
+  padding: 9px 25px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  border: 1.5px solid lightgrey;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+
+img {
+  height: 7rem;
+  width: 5rem;
+}
+
+.images {
+  display: flex;
+  flex-direction: row;
+}
+
+td {
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 500;
+}
+
+th {
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 500;
+}
